@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=us-ascii" http-equiv="Content-Type"/>
+<meta content="text/css" http-equiv="Content-Style-Type"/>
+<meta content="text/javascript" http-equiv="Content-Script-Type"/>
+<title>Collect Data for a Bug Report</title>
+<meta content="Oracle DARB XHTML Converter (Mode = document) - Merged Version 1033" name="generator"/>
+<meta content="This guide helps you to troubleshoot issues that might occur with Java Client applications created on the Java Platform, Standard Edition (Java SE) and Java HotSpot VM." name="description"/>
+<meta content="2014-12-22T14:9:29Z" name="date"/>
+<meta content="noarchive" name="robots"/>
+<meta content="Java Platform, Standard Edition Troubleshooting Guide, Release 8" name="doctitle"/>
+<meta content="Release 8" name="relnum"/>
+<meta content="E54483-02" name="partnum"/>
+<meta content="JSTGD" name="docid"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="../../../technotes/css/guide.css" />
+</head>
+<body>
+<!-- STATIC HEADER -->
+
+<!-- header start -->
+<div id="javaseheader">
+<div id="javaseheaderlogo">
+<img src="../../../images/javalogo.gif"
+alt="Java logo" />
+</div>
+<div id="javaseheaderindex">
+
+<a href=
+"../../../index.html">Documentation Contents</a>
+</div>
+<div class="clear"></div>
+</div>
+
+<!-- header end -->
+
+
+<b>Java Platform, Standard Edition Troubleshooting Guide</b><br/>
+
+<a href="toc.html">
+Contents</a>&nbsp;&nbsp;&nbsp;<a href="bugreports002.html">
+Previous</a>&nbsp;&nbsp;&nbsp;<a href="report-a-bug.html">
+Next</a><hr/><a id="CHDCAAAD" name="CHDCAAAD"/>
+<div id="JSTGD520">
+<h1>17.3 Collect Data for a Bug Report</h1>
+<p>In general, it is recommended to <b>test with the available latest update release or even an available latest EA (Early Access) release to see if the issue persists</b> and then collect as much relevant data as possible when you create a bug report or submit a support call. The following sections suggest the data to collect and, where applicable, it provides recommendations for the commands or general procedure for obtaining the data.</p>
+<ul>
+
+<li>
+<p><a href="#CHDCCAHH">Detailed Description of the Problem</a></p>
+</li>
+
+<li>
+<p><a href="#CHDJBIJA">Hardware Details</a></p>
+</li>
+
+<li>
+<p><a href="#CHDFDCGD">Operating System Details</a></p>
+</li>
+
+<li>
+<p><a href="#CHDIIIHH">Java SE Version</a></p>
+</li>
+
+<li>
+<p><a href="#CHDGAHDH">Command-Line Options</a></p>
+</li>
+
+<li>
+<p><a href="#CHDHHHBJ">Environment Variables</a></p>
+</li>
+
+<li>
+<p><a href="#CHDBIACE">Fatal Error Log</a></p>
+</li>
+
+<li>
+<p><a href="#CHDIGIHE">Core or Crash Dump</a></p>
+</li>
+
+<li>
+<p><a href="#CHDCACIH">Logs and Traces</a></p>
+</li>
+
+</ul>
+
+<a id="CHDCCAHH" name="CHDCCAHH"/>
+<div id="JSTGD528">
+<h2>17.3.1 Detailed Description of the Problem</h2>
+
+<p>When creating a problem description, try to include as much relevant information as possible.</p>
+
+<p>Describe the application, the environment, and the most important events leading up to the time when the problem happened.</p>
+
+<p>Report all troubleshooting steps and results that have already occurred.</p>
+
+<p>Sometimes, the problem can be reproduced only in a complex application environment.
+In this case, the description, coupled with logs, core file, and other relevant
+information, might be the only way to diagnose the issue. In these situations, the
+description should indicate if the submitter is willing to run further diagnostics
+or run test binaries on the system where the issue occurs.</p>
+
+<ul>
+   <li>If the problem is reproducible at will, then list the steps that are required
+    to demonstrate the problem.</li>
+   <li>If the problem can be demonstrated with a small test case, then include the test case and the commands to compile and execute the test case.</li>
+   <li>If the test case or problem requires third-party code, such as a commercial or
+    open source library or package, then provide then details about where and how to
+    obtain the library.</li>
+</ul>
+</div>
+
+<a id="CHDJBIJA" name="CHDJBIJA"/>
+<div id="JSTGD521">
+<h2>17.3.2 Hardware Details</h2>
+<p>Sometimes a bug arises or can be reproduced only on certain hardware configurations. If a fatal error occurs, the error log might contain the hardware details. If an error log is not available, document in the bug report the number and the type of processors in the machine, the clock speed, and, where applicable and if known, some details on the features of that processor. For example, in the case of Intel processors, it might be relevant that hyper-threading is available.</p>
+</div>
+
+<a id="CHDFDCGD" name="CHDFDCGD"/>
+<div id="JSTGD522">
+<h2>17.3.3 Operating System Details</h2>
+<p>On the Oracle Solaris operating system, the <code>showrev -a</code> command prints the operating system version and patch information.</p>
+<p>On Linux, it is important to know which distribution and version is used. Sometimes the <code>/etc/*release</code> file indicates the release information, but as components and packages can be upgraded independently, it is not always a reliable indication of the configuration. Therefore, in addition to the information from the <code>*release</code> file, collect the following information:</p>
+<ul>
+<li>
+<p>The kernel version. This can be obtained using the <code>uname -a</code> command.</p>
+</li>
+<li>
+<p>The <code>glibc</code> version. The <code>rpm -q glibc</code> command indicates the patch level of <code>glibc</code>.</p>
+</li>
+<li>
+<p>The thread library. There are two thread libraries for Linux, namely <code>LinuxThreads</code> and <code>NPTL</code>. The <code>LinuxThreads</code> library is used on 2.4 and older kernels and has "fixed stack" and "floating stack" variants. The Native POSIX Thread Library (<code>NPTL</code>) is used on the 2.6 kernel. Some Linux releases (such as RHEL3) include backports of <code>NPTL</code> to the 2.4 kernel. Use the command <code>getconf GNU_LIBPTHREAD_VERSION</code> to determine which thread library is used. If the <code>getconf</code> command returns an error to say that the variable does not exist, then it is likely that you are using an old kernel with the <code>LinuxThreads</code> library.</p>
+</li>
+</ul>
+</div>
+
+<a id="CHDIIIHH" name="CHDIIIHH"/>
+<div id="JSTGD523">
+<h2>17.3.4 Java SE Version</h2>
+<p>The Java SE version string can be obtained using the <code>java -version</code> command.</p>
+<p>Multiple versions of Java SE may be installed on the same machine. Therefore, ensure that you use the appropriate version of the <code>java</code> command by verifying that the installation bin directory appears in your <code>PATH</code> environment variable before other installations.</p>
+</div>
+
+<a id="CHDGAHDH" name="CHDGAHDH"/>
+<div id="JSTGD524">
+<h2>17.3.5 Command-Line Options</h2>
+
+<p>If the bug report does not include a fatal error log, it is important to document the full command line and all its options. This includes any options that specify heap settings (for example, the <code>-Xmx</code> option) or any <code>-XX</code> options that specify HotSpot specific options.</p>
+
+<p>If you can reproduce the issue at will, and you're able to read standard output (stdout) for the JVM, then you can add the <code>-XX:+PrintCommandLineFlags</code> option to obtain the full list of command-line options used by the application. This option will be active the next time the JVM is restarted.</p>
+
+<p>You can also run the
+<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jcmd.html"><code>jcmd</code> (Windows)</a>/<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jcmd.html"><code>jcmd</code> (Oracle Solaris and Linux)</a> command as follows to obtain the command-line options of a running VM:</p>
+
+<pre class="codeblock">jcmd <code><em>&lt;process ID for the Java process&gt;</em></code> VM.command_line</pre>
+
+<p>In addition, you can change the flags of a running JVM through <code>jcmd</code>. See the <code>VM.set_flag</code> command.</p>
+
+</div>
+
+<a id="CHDHHHBJ" name="CHDHHHBJ"/>
+<div id="JSTGD525">
+<h2>17.3.6 Environment Variables</h2>
+
+
+<p>Sometimes problems arise due to environment variable settings. When creating the bug report, indicate the values of the following Java environment variables (if set).</p>
+
+<ul>
+   <li><code>JAVA_TOOL_OPTIONS</code></li>
+   <li><code>_JAVA_OPTIONS</code></li>
+   <li><code>CLASSPATH</code></li>
+   <li><code>JAVA_COMPILER</code></li>
+   <li><code>PATH</code></li>
+   <li><code>USERNAME</code></li>
+</ul>
+
+
+<div align="center">
+<br/>
+<table border="1" cellpadding="3" cellspacing="0" dir="ltr" frame="hsides" rules="groups" summary="" width="80%">
+<tbody>
+<tr>
+<td align="left">
+<p><b>Note:</b></p>
+You should obtain the values of environment variables from the context of the
+failing application. In addition, one or more configuration files may set the
+values of these environment variables for that failing application.</td>
+</tr>
+</tbody>
+</table>
+<br/>
+</div>
+
+<p>In addition, collect the following operating-system-specific environment variables.</p>
+
+<ul>
+  <li>On Oracle Solaris and Linux operating systems, collect the values of the
+      following environment variables:
+    <ul>
+      <li><code>LD_LIBRARY_PATH</code></li>
+      <li><code>LD_PRELOAD</code></li>
+    </ul>
+  </li>
+  <li>On Windows, collect the values of the following environment variables:
+    <ul>
+      <li><code>OS</code></li>
+      <li><code>PROCESSOR_IDENTIFIER</code></li>
+      <li><code>_ALT_JAVA_HOME_DIR</code></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<a id="CHDBIACE" name="CHDBIACE"/>
+<div id="JSTGD526">
+<h2>17.3.7 Fatal Error Log</h2>
+
+<p>When a fatal error occurs, an error log is created. For detailed information about this file, see <a href="felog.html#fatal_error_log_vm">Appendix A: Fatal Error Log</a>.</p>
+
+<p>The error log contains much information obtained at the time of the fatal error, such as version and environment information, details on the threads that provoked the crash, and so forth.</p>
+<p>If the fatal error log is generated, be sure to include it in the bug report or support call.</p>
+</div>
+
+<a id="CHDIGIHE" name="CHDIGIHE"/>
+<div id="JSTGD527">
+<h2>17.3.8 Core or Crash Dump</h2>
+
+<p>If a core file or crash dump has been created because of the reported issue,
+include it with the bug, size permitting.</p>
+
+<p>A Linux core file or a Windows crash dump contains the memory state of either
+an application or the operating system at the time the core or dump was created.
+Depending on a system's configuration, a core or crash dump may be created
+automatically when a crash happens. Consult with the system administrator to
+determine if a core file will be generate automatically and where.</p>
+
+
+<p>In the case of a hung process, the procedure for generating a dump is
+described in <a href="bugreports004.html#CHDJJAJE">Collect Core Dumps</a>.</p>
+</div>
+
+<a id="CHDCACIH" name="CHDCACIH"/>
+<div id="JSTGD529">
+<h2>17.3.9 Logs and Traces</h2>
+
+<p>In some cases, log or trace output can help to quickly determine the cause of
+a problem.</p>
+
+<p>For example, in the case of a performance issue the output of the
+<code>-verbose:gc</code> option can help in diagnosing the problem. This option
+enables output from the garbage collector.</p>
+
+<p>In other cases, you can use Java Flight
+Recorder (see <a href="tooldescr003.html#BABFDCDA">What Are Java Flight Recordings</a>)
+and <a href="https://docs.oracle.com/en/java/java-components/jdk-mission-control/" target="_blank">JDK Mission Control</a>
+to capture statistical information over the time period leading up to the problem.</p>
+
+<div align="center">
+<br/>
+<table border="1" cellpadding="3" cellspacing="0" dir="ltr" frame="hsides" rules="groups" summary="" width="80%">
+<tbody>
+<tr>
+<td align="left">
+<p><b>Note:</b></p>
+Java Flight Recorder (JFR) is a commercial feature. You can use it for free
+on developer computers and for evaluation purposes in test, development, and
+production environments. However, to enable JFR on a production server, you need
+a commercial license. Using the JDK Mission Control user interface for other
+purposes on the JDK, such as producing a flight recording for purely diagnostic
+purposes, does not require a commercial license. For more details
+about JFR commercial features and availability, see
+<a href="https://www.oracle.com/java/java-se-subscription/" target="_blank">Oracle Java SE Universal Subscription</a>.</td>
+</tr>
+</tbody>
+</table>
+<br/>
+</div>
+
+<p>In the case of a deadlock or a hung VM, the thread stacks can help diagnose
+the problem. Obtain thread stacks by pressing <code>Control+\</code> on Oracle
+Solaris and Linux or <code>Control+Break</code> on Windows. Alternatively, use
+the <code>Thread.dump_to_file</code> option in the
+<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jcmd.html"><code>jcmd</code> (Windows)</a>/<a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jcmd.html"><code>jcmd</code> (Oracle Solaris and Linux)</a>
+command.</p>
+
+<p>In general, provide all relevant logs, traces, and other output in the bug
+report or during the support call.</p>
+
+</div>
+
+
+</div>
+<a href="toc.html">
+Contents</a>&nbsp;&nbsp;&nbsp;<a href="bugreports002.html">
+Previous</a>&nbsp;&nbsp;&nbsp;<a href="report-a-bug.html">
+Next</a><hr/>
+
+
+
+
+
+<!--  footer start -->
+<div id="javasefooter">
+<div class="hr">
+<hr /></div>
+<div id="javasecopyright">
+<img id="oraclelogofooter" src=
+"../../../images/oraclelogo.gif" alt="Oracle and/or its affiliates"
+border="0" width="100" height="29" name=
+"oraclelogofooter" />
+
+<a href="../../../legal/cpyr.html">Copyright
+&#169;</a> 1993, 2024, Oracle and/or its affiliates. All rights
+reserved.</div>
+<div id="javasecontactus">
+<a href=
+"http://docs.oracle.com/javase/feedback.html">Contact
+Us</a>
+</div>
+</div>
+<!-- footer end -->
+
+<!-- STATIC FOOTER -->
+
+</body>
+</html>
