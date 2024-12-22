@@ -1,0 +1,73 @@
+@media (max-width: 1400px) {
+    .user-info, .opponent-info {
+        display: none; /* 隐藏元素 */
+    }
+}
+.user-info {
+    position: absolute;
+    bottom: 110px; /* 根据导航栏高度调整 */
+    left: 300px;
+    width: 200px;
+    background-color: rgba(173, 216, 230, 0.8); /* 设置蓝色背景透明 */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #4682B4; /* 柔和的蓝色边框，2像素宽，实线 */
+}
+
+.user-info h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.user-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.opponent-info {
+    position: absolute;
+    top: 110px;
+    left: 300px;
+    width: 200px;
+    background-color: rgba(173, 216, 230, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #4682B4;
+}
+
+.opponent-info h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.opponent-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#screen {
+    font-size: 20px; /* 适当字号 */
+    color: black; /* 白色文字 */
+    font-weight: bold;
+    font-family: 'Arial', sans-serif; /* 使用简洁现代的字体 */
+    position: absolute;
+    top: 630px; /* 确保在棋盘的正下方，微调位置 */
+    left: 50%;
+    transform: translateX(-50%); /* 水平居中 */
+    padding: 8px 20px; /* 适当增加内边距 */
+    border-radius: 5px; /* 圆角边框 */
+    text-align: center; /* 确保文本居中 */
+}
+
+/* 绘制棋盘线条的样式 */
+/*#chess {*/
+/*    border: 1px solid #8B8B8B;*/
+/*}*/
+
+
