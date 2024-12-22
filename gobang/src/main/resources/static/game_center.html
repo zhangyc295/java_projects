@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>游戏大厅</title>
+    <link rel="icon" href="pic/favicon.ico" type="image/x-icon">
+    <!-- 引入CSS文件 -->
+    <link rel="stylesheet" href="css/gameCenter_style.css">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+<div class="nav">
+    五子棋对战
+</div>
+<div class="container">
+    <div>
+        <div id="userInfo">
+            <p>用户名: <span id="username"></span></p>
+            <p>积分: <span id="score"></span></p>
+            <p>总游戏数: <span id="totalGame"></span></p>
+            <p>胜场数: <span id="winGame"></span></p>
+            <p>胜率: <span id="winRate"></span></p> <!-- 胜率 -->
+        </div>
+        <div id="matchButton">开始匹配</div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+
+<script>
+    $.ajax({
+        type: 'get',
+        url: '/user/getUserInfo',
+        success: function (response) {
+            var user = response;
+            // 更新页面上的用户信息
+            $('#username').text(user.username);
+            $('#score').text(user.score);
+            $('#totalGame').text(user.totalGame);
+            $('#winGame').text(user.winGame);
+            // 计算并显示胜率（假设totalGame不为0）
+            if (user.totalGame === 0) {
+                $('#winRate').text('0%');
+            } else {
+                var winRate = (user.winGame / user.totalGame * 100).toFixed(2) + '%';
+                $('#winRate').text(winRate);
+            }
+        },
+        error: function () {
+            alert("获取用户信息失败！");
+        }
+    });
+    //var websocket = new WebSocket("ws://127.0.0.1:8080/findMatch");
+    //let websocketUrl = "ws://127.0.0.1:8080/findMatch"
+    let websocketUrl = "ws://" + location.host + "/findMatch";
+    var websocket = new WebSocket(websocketUrl);
+
+    websocket.onopen = function () {
+        console.log("连接建立");
+    }
+    websocket.onerror = function () {
+        console.log("连接错误");
+
+    }
+    websocket.onclose = function () {
+        console.log("连接关闭");
+    }
+
+    //处理响应数据
+    websocket.onmessage = function (e) {
+        console.log("收到消息:" + e.data);
+        let resp = JSON.parse(e.data);
+        let matchButton = document.querySelector('#matchButton')
+        if (!resp.success) {
+            console.log("游戏大厅连接失败！" + resp.reason);
+            alert("游戏大厅连接失败！" + resp.reason);
+            location.replace("login.html");
+        }
+        if (resp.message === 'startMatch') {
+            console.log("开始匹配");
+            matchButton.innerHTML = "匹配中...（点击停止）";
+        } else if (resp.message === 'stopMatch') {
+            console.log("停止匹配");
+            matchButton.innerHTML = "开始匹配";
+        } else if (resp.message === 'matchSuccess') {
+            console.log("成功匹配对手");
+            location.replace("game_room.html");
+            //replace跳转
+        } else if (resp.message === 'repeatConnection') {
+            console.log("游戏大厅连接失败！" + resp.reason);
+            alert("游戏大厅连接失败！" + resp.reason);
+            location.replace("login.html");
+        } else {
+            console.log("连接失败！" + resp.reason);
+        }
+    }
+
+    //页面关闭之前 调用close()
+    window.onbeforeunload = function () {
+        websocket.close();
+    }
+
+    //开始匹配
+    let matchButton = document.querySelector('#matchButton');
+    matchButton.onclick = function () {
+        //检查连接
+        if (websocket.readyState === websocket.OPEN) {
+            if (matchButton.innerHTML === '开始匹配') {
+                console.log("开始匹配");
+                websocket.send(JSON.stringify({
+                    message: 'startMatch',
+                }));
+            } else if (matchButton.innerHTML === "匹配中...（点击停止）") {
+                console.log("停止匹配");
+                websocket.send(JSON.stringify({
+                    message: 'stopMatch',
+                }));
+            }
+        } else {
+            alert("服务器无法连接！");
+            location.replace("login.html");
+        }
+    }
+
+</script>
+</body>
+</html>
