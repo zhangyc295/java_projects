@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>题目列表</title>
+    <link rel="icon" href="image/favicon.ico" type="image/x-icon">
+    <style>
+        a {
+            text-decoration: none; /* 取消所有链接的下划线 */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: left; /* Changed from center to left for better readability */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px; /* Increased max-width for better visibility */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        #problem-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #problem-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            background-color: #fafafa;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #problem-list li:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-3px);
+        }
+
+        .problem-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .problem-info h2 {
+            margin: 0;
+            margin-right: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .problem-info span {
+            margin-right: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .problem-description {
+            flex-grow: 1;
+            max-width: 60%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        button.details-btn {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button.details-btn:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>题目列表</h1>
+    <ul id="problem-list"></ul>
+</div>
+
+<!-- jQuery -->
+<script src="js/jquery.min.js"></script>
+<script>
+    // 页面加载后，发起 AJAX 请求
+    $(document).ready(function() {
+        fetchProblems();
+    });
+
+    // 发起 AJAX 请求获取问题数据
+    function fetchProblems() {
+        $.ajax({
+            type: "GET",
+            url: "question",
+            dataType: "json",
+            success: function(data) {
+                console.log(data);  // 检查数据格式
+                renderProblems(data);
+            },
+            error: function(xhr, status, error) {
+                console.error("请求失败：", error);
+            }
+        });
+    }
+
+    // 根据获取到的数据渲染问题列表
+    function renderProblems(problems) {
+        var problemListHtml = '';  // 用于拼接问题列表的 HTML 字符串
+
+        // 遍历问题数组，逐个渲染问题
+        for (var i = 0; i < problems.length; i++) {
+            var problem = problems[i];
+            var listItem = '';
+
+            // 拼接每个问题的 HTML 内容
+            listItem += '<li class="problem-item">';
+            listItem += '<div class="problem-info">';
+            listItem += '<span>#' + problem.id + '</span>';
+            listItem += '<h2>' + problem.title + '</h2>';
+            listItem += '<span class="difficulty" style="color:' + getDifficultyColor(problem.level) + ';">' + problem.level + '</span>';
+            listItem += '</div>';
+            listItem += '<button class="details-btn" onclick="goToDetailPage(' + problem.id + ')">Details</button>';
+            listItem += '</li>';
+
+            // 拼接到问题列表 HTML 中
+            problemListHtml += listItem;
+        }
+
+        // 将拼接好的 HTML 内容插入到页面中的 ul 元素
+        $('#problem-list').html(problemListHtml);
+    }
+
+    // 跳转到详情页的函数，在新标签页打开
+    function goToDetailPage(problemId) {
+        window.open('detail.html?id=' + problemId, '_blank');  // 使用 _blank 打开新标签页
+    }
+
+    // 根据问题的难度返回不同的颜色
+    function getDifficultyColor(level) {
+        switch (level) {
+            case '简单':
+                return 'green';
+            case '中等':
+                return 'orange';
+            case '困难':
+                return 'red';
+            default:
+                return 'black';
+        }
+    }
+</script>
+</body>
+</html>
