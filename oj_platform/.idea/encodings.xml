@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/oj_modules/oj_friend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_modules/oj_job/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_modules/oj_judge/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_modules/oj_system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
