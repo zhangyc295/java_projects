@@ -1,3 +1,4 @@
 # 忽略所有项目中的 logs 文件夹
 **/logs/
 **/.idea/
+**/target/
