@@ -16,6 +16,8 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <packaging>pom</packaging>
     <modules>
         <module>oj_modules</module>
+        <module>oj_common</module>
+        <module>oj_gateway</module>
     </modules>
 
     <properties>
@@ -24,6 +26,18 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <spring-boot.version>3.0.1</spring-boot.version>
         <spring-cloud-alibaba.version>2022.0.0.0-RC2</spring-cloud-alibaba.version>
         <spring-cloud.version>2022.0.0</spring-cloud.version>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
+        <oj_common_entity.version>1.0-SNAPSHOT</oj_common_entity.version>
+        <oj_common_swagger.version>1.0-SNAPSHOT</oj_common_swagger.version>
+        <oj_common_security.version>1.0-SNAPSHOT</oj_common_security.version>
+        <oj_common_redis.version>1.0-SNAPSHOT</oj_common_redis.version>
+        <springdoc-openapi.version>2.2.0</springdoc-openapi.version>
+        <jakarta.xml.bind.version>3.0.1</jakarta.xml.bind.version>
+        <jaxb-runtime.version>3.0.2</jaxb-runtime.version>
+        <fastjson.version>2.0.43</fastjson.version>
+        <jwt.version>0.9.1</jwt.version>
+        <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
+        <hutool-all.version>5.8.22</hutool-all.version>
     </properties>
     <dependencies>
         <!-- bootstrap 启动器 -->
@@ -31,6 +45,16 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
+
+
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>annotationProcessor</scope>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -59,6 +83,9 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+
+
         </dependencies>
     </dependencyManagement>
 

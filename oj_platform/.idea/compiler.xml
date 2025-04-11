@@ -2,20 +2,32 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="oj_friend" />
-        <module name="oj_judge" />
+        <module name="oj_common_redis" />
         <module name="oj_job" />
         <module name="oj_system" />
+        <module name="oj_gateway" />
+        <module name="oj_common_security" />
+        <module name="oj_common_entity" />
+        <module name="oj_friend" />
+        <module name="oj_judge" />
+        <module name="oj_common_swagger" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="oj_common" options="" />
+      <module name="oj_common_entity" options="-parameters" />
+      <module name="oj_common_redis" options="-parameters" />
+      <module name="oj_common_security" options="-parameters" />
+      <module name="oj_common_swagger" options="-parameters" />
       <module name="oj_friend" options="-parameters" />
+      <module name="oj_gateway" options="-parameters" />
       <module name="oj_job" options="-parameters" />
       <module name="oj_judge" options="-parameters" />
       <module name="oj_modules" options="" />

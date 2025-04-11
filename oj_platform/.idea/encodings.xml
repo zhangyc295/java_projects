@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/oj_common/oj_common_entity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_common/oj_common_redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_common/oj_common_security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_common/oj_common_swagger/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/oj_gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oj_modules/oj_friend/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oj_modules/oj_job/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oj_modules/oj_judge/src/main/java" charset="UTF-8" />
