@@ -1,0 +1,26 @@
+.el-table{
+    th {
+        background-color: #06b2f7 !important;
+        color: #ffff;
+    }
+}
+
+.el-button--primary {
+    color: #32C5FF !important;
+}
+
+
+.el-button--text {
+    color: #32C5FF !important;
+    &.red span{
+        color: #FD4C40;
+    }
+}
+
+.el-pagination{
+    margin-top: 20px;
+    justify-content: flex-end;
+    .el-pager li.is-active {
+        background-color: #06b2f7;
+    }
+}
