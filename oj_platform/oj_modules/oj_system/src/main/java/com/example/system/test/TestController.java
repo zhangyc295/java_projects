@@ -1,10 +1,12 @@
 package com.example.system.test;
 
 import com.example.common.redis.RedisService;
-import com.example.system.model.Admin;
+import com.example.system.model.admin.Admin;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,6 +42,11 @@ public class TestController {
     public String log() {
         log.info("test log info");
         log.error("test log error ");
+        return "success";
+    }
+
+    @GetMapping("/valid")
+    public String valid(@Validated @RequestBody TestDTO testDTO) {
         return "success";
     }
 }

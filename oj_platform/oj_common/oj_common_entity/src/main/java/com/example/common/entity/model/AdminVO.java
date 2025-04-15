@@ -5,8 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AdminRedis {
-
+public class AdminVO {
     private String nickName;
-    private Integer identity;   // 1表示普通用户  2表示管理员
 }

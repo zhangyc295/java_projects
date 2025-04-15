@@ -31,6 +31,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <oj_common_swagger.version>1.0-SNAPSHOT</oj_common_swagger.version>
         <oj_common_security.version>1.0-SNAPSHOT</oj_common_security.version>
         <oj_common_redis.version>1.0-SNAPSHOT</oj_common_redis.version>
+        <oj_common_mybatis.version>1.0-SNAPSHOT</oj_common_mybatis.version>
         <springdoc-openapi.version>2.2.0</springdoc-openapi.version>
         <jakarta.xml.bind.version>3.0.1</jakarta.xml.bind.version>
         <jaxb-runtime.version>3.0.2</jaxb-runtime.version>
@@ -38,6 +39,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <jwt.version>0.9.1</jwt.version>
         <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
         <hutool-all.version>5.8.22</hutool-all.version>
+        <pagehelper.boot.version>2.0.0</pagehelper.boot.version>
     </properties>
     <dependencies>
         <!-- bootstrap 启动器 -->

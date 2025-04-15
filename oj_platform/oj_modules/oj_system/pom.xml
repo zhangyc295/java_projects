@@ -17,11 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-            <version>${mybatis-plus.version}</version>
-        </dependency>
+
 
         <dependency>
             <groupId>com.mysql</groupId>
@@ -68,6 +64,7 @@
             <artifactId>oj_common_redis</artifactId>
             <version>${oj_common_redis.version}</version>
         </dependency>
+
 
 
 
