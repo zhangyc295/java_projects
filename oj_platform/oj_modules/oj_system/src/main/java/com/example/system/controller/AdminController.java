@@ -2,7 +2,7 @@ package com.example.system.controller;
 
 import com.example.common.entity.constants.HttpConstants;
 import com.example.common.entity.controller.DatabaseController;
-import com.example.common.entity.model.AdminVO;
+import com.example.common.entity.model.LoginUserVO;
 import com.example.common.entity.model.Result;
 import com.example.system.model.admin.AdminSaveDTO;
 import com.example.system.model.admin.LoginDTO;
@@ -47,7 +47,7 @@ public class AdminController extends DatabaseController {
     @ApiResponse(responseCode = "1000", description = "获取管理员信息成功")
     @ApiResponse(responseCode = "2000", description = "服务器异常，请稍后重试")
     @ApiResponse(responseCode = "3104", description = "用户不存在")
-    public Result<AdminVO> getInfo(@RequestHeader(HttpConstants.AUTHENTICATION) String token) {
+    public Result<LoginUserVO> getInfo(@RequestHeader(HttpConstants.AUTHENTICATION) String token) {
         return adminService.info(token);
     }
 

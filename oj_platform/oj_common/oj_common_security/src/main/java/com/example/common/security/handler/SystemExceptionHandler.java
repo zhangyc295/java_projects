@@ -5,13 +5,16 @@ import cn.hutool.core.util.StrUtil;
 import com.example.common.entity.enums.ResultCode;
 import com.example.common.entity.model.Result;
 import com.example.common.security.exception.ServiceException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -64,6 +67,21 @@ public class SystemExceptionHandler {
         log.error(e.getMessage());
         String message = join(e.getAllErrors(), DefaultMessageSourceResolvable::getDefaultMessage, ", ");
         return Result.fail(ResultCode.FAILED_PARAMS.getCode(), message);
+    }
+
+    // 处理竞赛时间为空的问题
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public Result<?> handleDateParseException(HttpMessageNotReadableException e) {
+        if (e.getCause() instanceof InvalidFormatException) {
+            return Result.fail(ResultCode.CONTEST_HAS_NO_CONTENT);
+        }
+        return Result.fail(ResultCode.ERROR);
+    }
+
+    // 文件超大小异常
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public Result<?> handleMaxSizeException(MaxUploadSizeExceededException e) {
+        return Result.fail(ResultCode.FILE_LARGE);
     }
 
     private <E> String join(Collection<E> collection, Function<E, String> function, CharSequence delimiter) {

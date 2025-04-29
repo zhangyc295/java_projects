@@ -2,6 +2,7 @@ package com.example.common.redis;
 
 import com.alibaba.fastjson2.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
@@ -43,11 +44,11 @@ public class RedisService {
     /**
      * 延长有效时间
      *
-     * @param key     Redis键
-     * @param unit    时间单位
+     * @param key  Redis键
+     * @param unit 时间单位
      * @return true=设置成功；false=设置失败
      */
-    public Long getExpire(final String key,final TimeUnit  unit) {
+    public Long getExpire(final String key, final TimeUnit unit) {
         return redisTemplate.getExpire(key, unit);
     }
 
@@ -110,6 +111,11 @@ public class RedisService {
         }
         return JSON.parseObject(String.valueOf(t), clazz);
     }
+
+    // 计数+1
+    public Long increment(final String key) {
+        return redisTemplate.opsForValue().increment(key);
+    }
     //*************** 操作list结构 ****************
 
     /**
@@ -140,25 +146,43 @@ public class RedisService {
         return JSON.parseArray(JSON.toJSONString(range), clazz);
     }
 
-    /*
-     * 底层使用list结构存储数据(尾插 批量插⼊)
-     */
+    // 底层使用list结构存储数据(尾插 批量插⼊)
     public <T> Long rightPushAll(final String key, Collection<T> list) {
         return redisTemplate.opsForList().rightPushAll(key, list);
     }
 
-    /**
-     * 底层使用list结构存储数据(头插)
-     */
+    // 底层使用list结构存储数据(头插)
     public <T> Long leftPushForList(final String key, T value) {
         return redisTemplate.opsForList().leftPush(key, value);
     }
 
-    /**
-     * 底层使⽤list结构,删除指定数据
-     */
+    // 底层使⽤list结构,删除指定数据
     public <T> Long removeForList(final String key, T value) {
         return redisTemplate.opsForList().remove(key, 1L, value);
+    }
+//    redis 6 以上版本
+//    public <T> Long indexOf(final String key, T value) {
+//        return redisTemplate.opsForList().indexOf(key, value);
+//    }
+
+    public <T> Long indexOf(final String key, T value) {
+        List<Object> list = redisTemplate.opsForList().range(key, 0, -1);
+//        System.out.println(list);
+        if (list == null) return null;
+        String targetValue = String.valueOf(value);
+        for (int i = 0; i < list.size(); i++) {
+            if (targetValue.equals(String.valueOf(list.get(i)))) {
+                return (long) i;
+            }
+        }
+        return null;
+    }
+    // 效率低下 但windows 不支持redis 6
+
+
+    public <T> T index(final String key, long index, Class<T> clazz) {
+        Object object = redisTemplate.opsForList().index(key, index);
+        return JSON.parseObject(String.valueOf(object), clazz);
     }
 
     //************************ 操作Hash类型 ***************************
@@ -215,6 +239,28 @@ public class RedisService {
     public Long deleteCacheMapValue(final String key, final String hKey) {
         return redisTemplate.opsForHash().delete(key, hKey);
     }
+
+
+    public <T> List<T> multiGet(final List<String> keyList, Class<T> clazz) {
+        List list = redisTemplate.opsForValue().multiGet(keyList);
+        if (list == null || list.size() <= 0) {
+            return null;
+        }
+        List<T> result = new ArrayList<>();
+        for (Object o : list) {
+            result.add(JSON.parseObject(String.valueOf(o), clazz));
+        }
+        return result;
+    }
+
+    public <K, V> void multiSet(Map<? extends K, ? extends V> map) {
+        redisTemplate.opsForValue().multiSet(map);
+    }
+
+    public Long incrementHashValue(final String key, final String hKey, final long delta) {
+        return redisTemplate.opsForHash().increment(key, hKey, delta);
+    }
+
 }
 
 

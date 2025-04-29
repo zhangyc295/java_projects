@@ -1,6 +1,17 @@
-server:
-  port: 9201
+#server:
+#  port: 9201
 
 spring:
   application:
-    name: oj_friend
+    name: oj-friend
+  profiles:
+    active: local
+  cloud:
+    nacos:
+      discovery:
+        namespace: 5fba9c6d-acb3-4eac-9507-637bd8845561
+        server-addr: http://localhost:8848
+      config:
+        namespace: 5fba9c6d-acb3-4eac-9507-637bd8845561  # nacos命名空间
+        server-addr: http://localhost:8848
+        file-extension: yaml

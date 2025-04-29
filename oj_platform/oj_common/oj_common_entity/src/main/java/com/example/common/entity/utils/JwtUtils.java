@@ -32,12 +32,12 @@ public class JwtUtils {
     }
 
     public static String getAdminKey(Claims claims) {
-        Object value = claims.get(JwtConstants.ADMIN_KEY);
+        Object value = claims.get(JwtConstants.LOGIN_USER_KEY);
         return toStr(value);
     }
 
     public static String getAdminId(Claims claims) {
-        Object value = claims.get(JwtConstants.ADMIN_ID);
+        Object value = claims.get(JwtConstants.LOGIN_USER_ID);
         return toStr(value);
     }
 

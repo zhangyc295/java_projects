@@ -7,7 +7,7 @@ import java.util.List;
 public interface QuestionService {
     List<QuestionListVO> list(QuestionShowDTO questionShowDTO);
 
-    int add(QuestionAddDTO questionAddDTO);
+    boolean add(QuestionAddDTO questionAddDTO);
 
     QuestionDetailVO detail(Long questionId);
 
