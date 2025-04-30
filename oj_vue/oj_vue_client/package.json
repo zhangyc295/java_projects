@@ -1,0 +1,29 @@
+{
+  "name": "oj_vue_client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "ace-builds": "^1.4.13",
+    "axios": "^1.8.4",
+    "dayjs": "^1.11.13",
+    "element-plus": "^2.9.8",
+    "js-cookie": "^3.0.5",
+    "save": "^2.9.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "sass-embedded": "^1.87.0",
+    "unplugin-auto-import": "^19.1.2",
+    "unplugin-vue-components": "^28.5.0",
+    "vite": "^6.2.4",
+    "vite-plugin-vue-devtools": "^7.7.2"
+  }
+}
