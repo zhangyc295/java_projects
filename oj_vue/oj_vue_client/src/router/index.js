@@ -27,6 +27,12 @@ const router = createRouter({
           meta: { showBanner: false },
         },
         {
+          path: "client/message",
+          name: "clientMessage",
+          component: () => import("../views/ClientMessage.vue"),
+          meta: { showBanner: false },
+        },
+        {
           path: "client/detail",
           name: "ClientDetail",
           component: () => import("../views/ClientDetail.vue"),

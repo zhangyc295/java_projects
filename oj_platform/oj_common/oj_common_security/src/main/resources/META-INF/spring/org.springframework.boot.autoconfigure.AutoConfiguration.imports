@@ -1,4 +1,0 @@
-com.example.common.security.handler.SystemExceptionHandler
-com.example.common.security.service.TokenService
-com.example.common.security.config.WebMvcConfig
-com.example.common.security.interceptor.TokenInterceptor

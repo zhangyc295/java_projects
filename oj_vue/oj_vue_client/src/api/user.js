@@ -78,10 +78,3 @@ export function userSubmitService(params = {}) {
   });
 }
 
-// export function userSubmitService(params = {}) {
-//   return service({
-//     url: "/client/question/submit",
-//     method: "post",
-//     data: params,
-//   });
-// }

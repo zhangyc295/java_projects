@@ -10,6 +10,9 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['__vite__injectQuery'] // 明确排除冲突变量
+  },
   plugins: [
     vue(),
     vueDevTools(),
@@ -38,5 +41,7 @@ export default defineConfig({
     },
   },
 })
+
+
 
 

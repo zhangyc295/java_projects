@@ -17,17 +17,17 @@ export function enterContestService(enterContestDTO) {
     });
 }
 
-// export function getExamRankListService(params) {
-//   return service({
-//     url: "/exam/rank/list",
-//     method: "get",
-//     params,
-//   });
-// }
+export function getContestRankListService(params) {
+  return service({
+    url: "/contest/rank/list",
+    method: "get",
+    params,
+  });
+}
 
-// export function getMyExamListService(params = {}) {
+// export function getMyContestListService(params = {}) {
 //   return service({
-//     url: "/user/exam/list",
+//     url: "/client/contest/list",
 //     method: "get",
 //     params,
 //   });

@@ -56,12 +56,12 @@ async function login() {
         const loginResult = await adminLogin(account.value, password.value)
         //console.log("loginResult:", loginResult)
         ElMessage.success('登录成功')
-        router.push("/oj/system")
+        router.push("/oj/system/question")
         //页面跳转
 
         setToken(loginResult.data)
         //token储存
-    }catch (error){
+    } catch (error) {
         console.log("error:", error)
     }
     // if (loginResult.data.code === 1000) {

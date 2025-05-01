@@ -15,11 +15,7 @@ const router = createRouter({
       redirect:'/oj/login'
     },   //http://localhost:5173/  ->  http://localhost:5173/oj/system
 
-    {
-      path: '/oj/system',
-      name: 'system',
-      component: () => import('../views/System.vue'),
-    },
+    
 
     {
       path: '/oj/system',
@@ -40,6 +36,11 @@ const router = createRouter({
           path: 'contest',
           name: 'contest',
           component: () => import('../views/Contest.vue'),
+        },
+        {
+          path: 'addContest',
+          name: 'addContest',
+          component: () => import('../views/AddContest.vue'),
         }
       ]
     },
@@ -51,7 +52,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) =>{
   if(getToken()){
     if(to.path === '/oj/login'){
-      next({ path: '/oj/system'})
+      next({ path: '/oj/system/question'})
     }else{
       next()
     }
