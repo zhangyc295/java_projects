@@ -2,6 +2,7 @@ package com.example.friend.controller;
 
 import com.example.common.entity.controller.DatabaseController;
 import com.example.common.entity.model.Result;
+import com.example.friend.aspect.CheckStatus;
 import com.example.friend.model.client.ClientSubmitDTO;
 import com.example.friend.service.ClientQuestionService;
 import com.example.openfeign.model.SubmitResultVO;
@@ -16,6 +17,7 @@ public class ClientQuestionController extends DatabaseController {
     @Autowired
     private ClientQuestionService clientQuestionService;
 
+
     //用户提交代码 (通过 openfeign 服务间调用)
     @PostMapping("/submit")
     @Operation(summary = "用户提交代码", description = "提交代码")
@@ -26,6 +28,8 @@ public class ClientQuestionController extends DatabaseController {
         return clientQuestionService.submit(clientSubmitDTO);
     }
 
+
+    @CheckStatus
     //用户提交代码 (通过rabbitmq)
     @PostMapping("/rabbitmq/submit")
     @Operation(summary = "用户提交代码", description = "提交代码")
@@ -36,6 +40,7 @@ public class ClientQuestionController extends DatabaseController {
         return convertToResult(clientQuestionService.submitByRabbitMQ(clientSubmitDTO));
     }
 
+    @CheckStatus
     //前端获取判题结果
     @GetMapping("/result")
     @Operation(summary = "获取判题结果", description = "获取判题结果")

@@ -32,8 +32,8 @@ public class ClientCacheManager {
                 .select(Client::getUserId, Client::getNickName, Client::getUserName,
                         Client::getHeadImage, Client::getGender, Client::getTelephone,
                         Client::getEmail, Client::getSchool, Client::getMajor,
-                        Client::getIntroduction).eq(Client::getUserId, userId));
-        if(client == null) {
+                        Client::getIntroduction, Client::getStatus).eq(Client::getUserId, userId));
+        if (client == null) {
             return null;
         }
         refreshClient(client);

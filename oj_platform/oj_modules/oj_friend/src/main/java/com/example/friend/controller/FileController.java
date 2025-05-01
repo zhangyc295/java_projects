@@ -2,6 +2,7 @@ package com.example.friend.controller;
 
 import com.example.common.entity.model.Result;
 import com.example.common.files.OSSResult;
+import com.example.friend.aspect.CheckStatus;
 import com.example.friend.service.FileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +17,8 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
+
+    @CheckStatus
     @PostMapping("/upload")
     @Operation(summary = "头像上传", description = "上传至OSS")
     @ApiResponse(responseCode = "1000", description = "上传成功")

@@ -31,17 +31,11 @@
 
     </select>
 
-<!--    <select id="selectHostQuestionList" resultType="java.lang.Long">-->
-<!--        SELECT-->
-<!--            question_id,-->
-<!--            count(question_id) hot_count-->
-<!--        FROM-->
-<!--            tb_user_submit-->
-<!--        WHERE-->
-<!--            exam_id is null-->
-<!--        GROUP BY-->
-<!--            question_id-->
-<!--        ORDER BY-->
-<!--            hot_count DESC-->
-<!--    </select>-->
+    <select id="selectHostQuestionList" resultType="java.lang.Long">
+        SELECT question_id
+        FROM oj_answer
+        GROUP BY question_id
+        ORDER BY COUNT(*) DESC
+            LIMIT 5;
+    </select>
 </mapper>

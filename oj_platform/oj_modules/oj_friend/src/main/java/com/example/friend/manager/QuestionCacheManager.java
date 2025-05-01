@@ -7,12 +7,11 @@ import com.example.common.entity.enums.ResultCode;
 import com.example.common.redis.RedisService;
 import com.example.common.security.exception.ServiceException;
 import com.example.friend.mapper.QuestionMapper;
-import com.example.friend.model.quesition.Question;
+import com.example.friend.model.question.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class QuestionCacheManager {

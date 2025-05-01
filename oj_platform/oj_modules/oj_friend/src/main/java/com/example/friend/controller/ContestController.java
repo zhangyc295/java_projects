@@ -4,6 +4,7 @@ import com.example.common.entity.controller.DatabaseController;
 import com.example.common.entity.model.Result;
 import com.example.common.entity.model.TableResult;
 import com.example.friend.model.contest.ContestListVO;
+import com.example.friend.model.contest.ContestRankDTO;
 import com.example.friend.model.contest.ContestShowDTO;
 import com.example.friend.service.ContestService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,6 +42,15 @@ public class ContestController extends DatabaseController {
 //        System.out.println(contestShowDTO.getType());
         return contestService.redisList(contestShowDTO);
     }
+
+    @GetMapping("/rank/list")
+    @Operation(summary = "获取竞赛排名信息", description = "竞赛排名信息")
+    @ApiResponse(responseCode = "1000", description = "获取竞赛信息成功")
+    @ApiResponse(responseCode = "2000", description = "服务器异常，请稍后重试")
+    public TableResult rankList(ContestRankDTO contestRankDTO) {
+        return contestService.rankList(contestRankDTO);
+    }
+
 
     @GetMapping("/getFirstQuestion")
     @Operation(summary = "获取竞赛题目信息", description = "竞赛第一题")

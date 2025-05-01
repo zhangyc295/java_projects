@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum ClientStatus {
     NORMAL(1, "正常"),
-    LIMIT(2, "拉黑");
+    LIMIT(0, "拉黑");
 
     private final Integer value;
     private final String description;

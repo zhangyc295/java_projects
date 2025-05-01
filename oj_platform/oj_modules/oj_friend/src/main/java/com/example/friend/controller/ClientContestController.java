@@ -4,6 +4,7 @@ import com.example.common.entity.constants.HttpConstants;
 import com.example.common.entity.controller.DatabaseController;
 import com.example.common.entity.model.Result;
 import com.example.common.entity.model.TableResult;
+import com.example.friend.aspect.CheckStatus;
 import com.example.friend.model.contest.ContestDTO;
 import com.example.friend.model.contest.ContestShowDTO;
 import com.example.friend.service.ClientContestService;
@@ -21,6 +22,8 @@ public class ClientContestController extends DatabaseController {
     @Autowired
     private ClientContestService clientContestService;
 
+    @CheckStatus
+    // 限制用户功能
     @PostMapping("/enter")
     @Operation(summary = "竞赛报名", description = "用户报名竞赛")
     @ApiResponse(responseCode = "1000", description = "用户报名成功")

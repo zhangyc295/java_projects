@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.common.entity.enums.ContestDeleteFlag;
+import com.example.common.entity.enums.ContestStatus;
 import com.example.common.entity.enums.ResultCode;
 import com.example.common.security.exception.ServiceException;
 import com.example.system.manager.ContestCacheManager;
@@ -177,7 +178,8 @@ public class ContestServiceImpl extends ServiceImpl<ContestQuestionMapper, Conte
         if (count == 0) {
             throw new ServiceException(ResultCode.CONTEST_HAS_NO_QUESTION);
         }
-        contest.setStatus(1);
+//        contest.setStatus(1);
+        contest.setStatus(ContestStatus.PUBLISH.getValue());
         // 将新发布的竞赛存储到redis中
         contestCacheManager.addCache(contest);
 
@@ -190,7 +192,8 @@ public class ContestServiceImpl extends ServiceImpl<ContestQuestionMapper, Conte
         if (contest.getStartTime().isBefore(LocalDateTime.now())) {
             throw new ServiceException(ResultCode.CONTEST_START);
         }
-        contest.setStatus(0);
+//        contest.setStatus(0);
+        contest.setStatus(ContestStatus.UNPUBLISH.getValue());
 
         // 将发布的竞赛信息从redis中删除
         contestCacheManager.deleteCache(contestId);

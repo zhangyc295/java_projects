@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.job.mapper.UserContestMapper">
+
+    <update id="updateUserScore">
+        <foreach collection="rankInfoList" item="item" separator=";">
+            UPDATE
+            user_contest_mapping
+            SET
+            score = #{item.score}, contest_rank = #{item.contestRank}
+            WHERE
+            contest_id = #{item.contestId} AND user_id = #{item.userId}
+        </foreach>
+    </update>
+</mapper>

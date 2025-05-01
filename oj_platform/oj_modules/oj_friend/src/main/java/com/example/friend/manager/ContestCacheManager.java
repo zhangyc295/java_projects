@@ -13,10 +13,7 @@ import com.example.friend.mapper.ClientContestMapper;
 import com.example.friend.mapper.ContestMapper;
 import com.example.friend.mapper.ContestQuestionMapper;
 import com.example.friend.model.client.ClientContest;
-import com.example.friend.model.contest.Contest;
-import com.example.friend.model.contest.ContestListVO;
-import com.example.friend.model.contest.ContestQuestion;
-import com.example.friend.model.contest.ContestShowDTO;
+import com.example.friend.model.contest.*;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,11 +51,10 @@ public class ContestCacheManager {
         String contestQuestionListKey = getContestQuestionListKey(contestId);
         return redisService.getListSize(contestQuestionListKey);
     }
-//
-//    public Long getRankListSize(Long examId) {
-//        return redisService.getListSize(getExamRankListKey(examId));
-//    }
 
+    public Long getRankListSize(Long contestId) {
+        return redisService.getListSize(getRankListKey(contestId));
+    }
 
     public List<ContestListVO> getContestVOList(ContestShowDTO contestShowDTO, Long userId) {
         int start = (contestShowDTO.getPageNumber() - 1) * contestShowDTO.getPageSize();
@@ -75,14 +71,12 @@ public class ContestCacheManager {
         }
         return contestVOList;
     }
+    public List<ContestRankVO> getContestRankVOList(ContestRankDTO contestRankDTO) {
+        int start = (contestRankDTO.getPageNumber() - 1) * contestRankDTO.getPageSize();
+        int end = start + contestRankDTO.getPageSize() - 1; //下标需要 -1
+        return redisService.getCacheListByRange(getRankListKey(contestRankDTO.getContestId()), start, end, ContestRankVO.class);
+    }
 
-
-    //    public List<ExamRankVO> getExamRankList(ExamRankDTO examRankDTO) {
-//        int start = (examRankDTO.getPageNum() - 1) * examRankDTO.getPageSize();
-//        int end = start + examRankDTO.getPageSize() - 1; //下标需要 -1
-//        return redisService.getCacheListByRange(getExamRankListKey(examRankDTO.getExamId()), start, end, ExamRankVO.class);
-//    }
-//
     public List<Long> getAllUserContestList(Long userId) {
         String contestListKey = RedisConstants.CLIENT_CONTEST_LIST + userId;
         List<Long> userContestIdList = redisService.getCacheListByRange(contestListKey, 0, -1, Long.class);
@@ -179,13 +173,13 @@ public class ContestCacheManager {
         redisService.expire(getContestQuestionListKey(contestId), seconds, TimeUnit.SECONDS);
     }
 
-//    public void refreshExamRankCache(Long examId) {
-//        List<ExamRankVO> examRankVOList = userExamMapper.selectExamRankList(examId);
-//        if (CollectionUtil.isEmpty(examRankVOList)) {
-//            return;
-//        }
-//        redisService.rightPushAll(getExamRankListKey(examId), examRankVOList);
-//    }
+    public void refreshContestRankCache(Long contestId) {
+        List<ContestRankVO> contestRankVOList = clientContestMapper.selectContestRankList(contestId);
+        if (CollectionUtil.isEmpty(contestRankVOList)) {
+            return;
+        }
+        redisService.rightPushAll(getRankListKey(contestId), contestRankVOList);
+    }
 
     private List<ContestListVO> getExamListByDB(ContestShowDTO contestShowDTO, Long userId) {
         PageHelper.startPage(contestShowDTO.getPageNumber(), contestShowDTO.getPageSize());
@@ -241,9 +235,7 @@ public class ContestCacheManager {
         return RedisConstants.CONTEST_QUESTION_LIST + contestId;
     }
 
-
-//
-//    private String getExamRankListKey(Long examId) {
-//        return CacheConstants.EXAM_RANK_LIST + examId;
-//    }
+    public String getRankListKey(Long contestId) {
+        return RedisConstants.CONTEST_RANK_LIST + contestId;
+    }
 }

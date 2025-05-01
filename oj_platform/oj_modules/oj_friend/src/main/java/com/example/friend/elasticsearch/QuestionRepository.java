@@ -1,6 +1,6 @@
 package com.example.friend.elasticsearch;
 
-import com.example.friend.model.quesition.es.QuestionES;
+import com.example.friend.model.question.es.QuestionES;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;

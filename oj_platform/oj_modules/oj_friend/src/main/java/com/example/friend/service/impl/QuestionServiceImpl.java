@@ -9,11 +9,9 @@ import com.example.common.entity.model.TableResult;
 import com.example.friend.elasticsearch.QuestionRepository;
 import com.example.friend.manager.QuestionCacheManager;
 import com.example.friend.mapper.QuestionMapper;
-import com.example.friend.model.quesition.Question;
-import com.example.friend.model.quesition.QuestionDetailVO;
-import com.example.friend.model.quesition.QuestionListVO;
-import com.example.friend.model.quesition.QuestionShowDTO;
-import com.example.friend.model.quesition.es.QuestionES;
+import com.example.friend.mapper.UserSubmitMapper;
+import com.example.friend.model.question.*;
+import com.example.friend.model.question.es.QuestionES;
 import com.example.friend.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +33,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private QuestionCacheManager questionCacheManager;
+
+    @Autowired
+    private UserSubmitMapper userSubmitMapper;
 
     @Override
     public TableResult list(QuestionShowDTO questionShowDTO) {
@@ -103,7 +104,10 @@ public class QuestionServiceImpl implements QuestionService {
         return questionCacheManager.prevQuestion(questionId).toString();
     }
 
-
+    public List<HotQuestionVO> getHotQuestion() {
+        List<Long> HostQuestionList = userSubmitMapper.selectHostQuestionList();
+        return questionMapper.selectTitleByIds(HostQuestionList);
+    }
 
     // 从数据库查询 并存到ES中
     private void refreshQuestion() {
@@ -119,4 +123,7 @@ public class QuestionServiceImpl implements QuestionService {
 //        questionESList.forEach(questionES -> System.out.println(questionES.getQuestionId() + ": " + questionES.getTitle()));
         questionRepository.saveAll(questionESList);
     }
+
+
+
 }

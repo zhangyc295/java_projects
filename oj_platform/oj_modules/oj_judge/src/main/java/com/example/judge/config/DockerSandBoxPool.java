@@ -91,8 +91,8 @@ public class DockerSandBoxPool {
                     blockingQueue.add(container.getId());
                     //  id   容器名
                     containerNameMap.put(container.getId(), containerName);
-                    System.out.println("==================" + container.getId());
-                    System.out.println("==================" + containerName);
+//                    System.out.println("==================" + container.getId());
+//                    System.out.println("==================" + containerName);
                     return;
                 }
             }

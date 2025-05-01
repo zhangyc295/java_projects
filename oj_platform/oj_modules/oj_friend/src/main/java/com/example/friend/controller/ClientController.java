@@ -4,6 +4,7 @@ import com.example.common.entity.constants.HttpConstants;
 import com.example.common.entity.controller.DatabaseController;
 import com.example.common.entity.model.LoginUserVO;
 import com.example.common.entity.model.Result;
+import com.example.friend.aspect.CheckStatus;
 import com.example.friend.model.client.*;
 import com.example.friend.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,6 +19,7 @@ public class ClientController extends DatabaseController {
 
     @Autowired
     private ClientService clientService;
+
 
     @PostMapping("/sendCode")
     @Operation(summary = "发送验证码", description = "验证码")
@@ -82,6 +84,7 @@ public class ClientController extends DatabaseController {
         return Result.success(clientService.detail());
     }
 
+    @CheckStatus
     @PutMapping("/edit")
     @Operation(summary = "编辑用户信息", description = "编辑个人信息")
     @ApiResponse(responseCode = "1000", description = "修改信息成功")
@@ -106,6 +109,7 @@ public class ClientController extends DatabaseController {
         return convertToResult(clientService.editPassword(clientPasswordDTO));
     }
 
+    @CheckStatus
     @PutMapping("/headImage/update")
     @Operation(summary = "编辑用户头像信息", description = "上传个人头像")
     @ApiResponse(responseCode = "1000", description = "修改信息成功")

@@ -54,10 +54,12 @@ public enum ResultCode {
 
     FIRST_QUESTION(3400,"当前题目已经是第一题"),
     LAST_QUESTION(3401,"当前题目已经是最后一题"),
+    CODE_FORMAT_ERROR(3402,"请检查提交的代码格式"),
 
     NOT_SUPPORT(3500,"当前题目不支持此语言"),
 
     FAILED_RABBIT_PRODUCE(3600,"消息队列生产异常");
+
 
     private final int code;
     private final String msg;

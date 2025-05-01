@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.friend.mapper.MessageContentMapper">
+    <select id="selectMessageContentList" resultType="com.example.friend.model.message.MessageContentVO">
+        SELECT mc.content_id,
+               mc.message_title,
+               mc.message_content
+        FROM oj_message m
+                 JOIN oj_message_content mc
+                      ON m.content_id = mc.content_id
+        WHERE m.receive_id = #{userId}
+        ORDER BY m.create_time ASC
+    </select>
+
+</mapper>

@@ -19,8 +19,15 @@ public class RedisConstants {
     public final static String CLIENT_CONTEST_LIST = "CCL:";       //用户的竞赛列表
 
     public final static String CLIENT_DETAIL_INFO = "CDI:";       //用户详细信息
-    public final static Long CLIENT_INFO_EXPIRATION = 10L;        //用户详细信息
+    public final static Long CLIENT_INFO_EXPIRATION = 10L;
     public final static String CLIENT_UPLOAD_TIMES = "CUT:";      //头像上传次数
-    public final static String QUESTION_LIST = "QT:";             //题目id列表
-    public final static String CONTEST_QUESTION_LIST = "CQT:";    //竞赛题目id列表
+    public final static String QUESTION_LIST = "QL:";             //题目id列表
+    public final static String CONTEST_QUESTION_LIST = "CQL:";    //竞赛题目id列表
+
+
+    public final static String CLIENT_MESSAGE_LIST = "CML:";      //用户消息列表
+    public final static String MESSAGE_CONTENT = "MC:";           //竞赛结果通知详情
+
+    public final static String CONTEST_RANK_LIST = "CRL:";        //竞赛排名信息
+
 }

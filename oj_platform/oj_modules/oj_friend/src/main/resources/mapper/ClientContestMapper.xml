@@ -15,4 +15,12 @@
         ORDER BY user_contest_mapping.create_time DESC
     </select>
 
+    <select id="selectContestRankList" resultType="com.example.friend.model.contest.ContestRankVO">
+        SELECT user_id,
+               score,
+               contest_rank
+        FROM user_contest_mapping
+        WHERE contest_id = #{contestId}
+        ORDER BY contest_rank
+    </select>
 </mapper>

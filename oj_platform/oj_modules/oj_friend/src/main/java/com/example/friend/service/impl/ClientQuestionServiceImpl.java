@@ -16,9 +16,9 @@ import com.example.friend.mapper.QuestionMapper;
 import com.example.friend.mapper.UserSubmitMapper;
 import com.example.friend.model.client.ClientSubmitDTO;
 import com.example.friend.model.client.UserSubmit;
-import com.example.friend.model.quesition.Question;
-import com.example.friend.model.quesition.QuestionCase;
-import com.example.friend.model.quesition.es.QuestionES;
+import com.example.friend.model.question.Question;
+import com.example.friend.model.question.QuestionCase;
+import com.example.friend.model.question.es.QuestionES;
 import com.example.friend.rabbitmq.JudgeProducer;
 import com.example.friend.service.ClientQuestionService;
 import com.example.openfeign.RemoteJudgeService;
@@ -120,6 +120,6 @@ public class ClientQuestionServiceImpl implements ClientQuestionService {
         if (targetLastIndex != -1) {
             return userCode.substring(0, targetLastIndex) + "\n" + mainFunc + "\n" + userCode.substring(targetLastIndex);
         }
-        throw new ServiceException(ResultCode.FAILED);
+        throw new ServiceException(ResultCode.CODE_FORMAT_ERROR);
     }
 }
