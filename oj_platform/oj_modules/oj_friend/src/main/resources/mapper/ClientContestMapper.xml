@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.friend.mapper.ClientContestMapper">
+    <select id="selectMyContestList" resultType="com.example.friend.model.contest.ContestListVO">
+        SELECT oj_contest.contest_id,
+               oj_contest.title,
+               oj_contest.start_time,
+               oj_contest.end_time
+        FROM user_contest_mapping
+                 JOIN oj_contest
+                      ON user_contest_mapping.contest_id = oj_contest.contest_id
+        WHERE user_contest_mapping.user_id = #{userId}
+        ORDER BY user_contest_mapping.create_time DESC
+    </select>
+
+    <select id="selectContestRankList" resultType="com.example.friend.model.contest.ContestRankVO">
+        SELECT user_id,
+               score,
+               contest_rank
+        FROM user_contest_mapping
+        WHERE contest_id = #{contestId}
+        ORDER BY contest_rank
+    </select>
+</mapper>

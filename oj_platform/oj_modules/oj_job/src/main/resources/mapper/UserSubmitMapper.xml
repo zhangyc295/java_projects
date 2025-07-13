@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.job.mapper.UserSubmitMapper">
+<!--竞赛分数统计排名-->
+    <select id="selectUserScoreList" resultType="com.example.job.entity.RankInfo">
+        SELECT
+        contest_id,
+        user_id,
+        sum(score) as score
+        FROM
+        oj_answer
+        WHERE
+        <foreach collection="contestIdSet" open="contest_id in ( " close=" ) " item="contestId" separator=",">
+            #{contestId}
+        </foreach>
+        GROUP BY
+        contest_id,user_id
+        ORDER BY
+        score DESC
+    </select>
+</mapper>

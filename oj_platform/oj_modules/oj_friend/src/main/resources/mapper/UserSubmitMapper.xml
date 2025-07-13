@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.friend.mapper.UserSubmitMapper">
+    <select id="selectQuestionResult" resultType="com.example.friend.model.client.UserSubmit">
+        SELECT
+            submit_id,
+            pass,
+            error_message,
+            case_judge_result
+        FROM
+            oj_answer
+        <where>
+            <if test="questionId != null">
+                AND question_id = #{questionId}
+            </if>
+            <if test="contestId !=null ">
+                AND contest_id = #{contestId}
+            </if>
+            <if test="contestId == null ">
+                AND contest_id is null
+            </if>
+            <if test="userId !=null ">
+                AND user_id = #{userId}
+            </if>
+            <if test="submitTime !=null and submitTime !='' ">
+                AND (create_time &gt;= #{submitTime} or update_time &gt;= #{submitTime})
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectHostQuestionList" resultType="java.lang.Long">
+        SELECT question_id
+        FROM oj_answer
+        GROUP BY question_id
+        ORDER BY COUNT(*) DESC
+            LIMIT 5;
+    </select>
+</mapper>

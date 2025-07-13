@@ -17,6 +17,10 @@
         <module>oj_common_security</module>
         <module>oj_common_redis</module>
         <module>oj_common_mybatis</module>
+        <module>oj_common_message</module>
+        <module>oj_common_files</module>
+        <module>oj_common_elasticsearch</module>
+        <module>oj_common_rabbitmq</module>
     </modules>
 
     <properties>

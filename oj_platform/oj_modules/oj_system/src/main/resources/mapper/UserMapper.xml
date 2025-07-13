@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.UserMapper">
+    <select id="selectUserList" resultType="com.example.system.model.user.UserListVO">
+        SELECT
+        user_id,
+        user_name,
+        nick_name,
+        gender,
+        telephone,
+        email,
+        school,
+        major,
+        introduction,
+        status
+        FROM oj_user
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                AND user_name LIKE CONCAT('%', #{userName}, '%')
+            </if>
+        </where>
+        ORDER BY
+        user_id ASC
+    </select>
+</mapper>

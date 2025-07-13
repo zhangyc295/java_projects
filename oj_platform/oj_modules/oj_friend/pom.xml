@@ -16,5 +16,49 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+
+
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>oj_common_mybatis</artifactId>
+            <version>${oj_common_mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>oj_common_message</artifactId>
+            <version>${oj_common_message.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>oj_common_elasticsearch</artifactId>
+            <version>${oj_common_elasticsearch.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>oj_common_files</artifactId>
+            <version>${oj_common_files.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>oj_common_rabbitmq</artifactId>
+            <version>${oj_common_rabbitmq.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+    </dependencies>
 
 </project>

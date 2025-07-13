@@ -18,7 +18,6 @@
     </properties>
     <dependencies>
 
-
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -26,48 +25,14 @@
 
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>oj_common_swagger</artifactId>
-            <version>${oj_common_swagger.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.xml.bind</groupId>
-                    <artifactId>jakarta.xml.bind-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.jaxb</groupId>
-                    <artifactId>jaxb-runtime</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- 添加与你的 oj_common_swagger 相同版本的 jakarta.xml.bind 和 jaxb-runtime -->
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>${jakarta.xml.bind.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>${jaxb-runtime.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>oj_common_security</artifactId>
-            <version>${oj_common_security.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.example</groupId>
             <artifactId>oj_common_redis</artifactId>
             <version>${oj_common_redis.version}</version>
         </dependency>
-
-
-
-
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>oj_common_elasticsearch</artifactId>
+            <version>${oj_common_elasticsearch.version}</version>
+        </dependency>
     </dependencies>
 
 

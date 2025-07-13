@@ -18,6 +18,8 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <module>oj_modules</module>
         <module>oj_common</module>
         <module>oj_gateway</module>
+        <module>oj_openfeign</module>
+        <!--        <module>oj_common/oj_common_message</module>-->
     </modules>
 
     <properties>
@@ -32,6 +34,12 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <oj_common_security.version>1.0-SNAPSHOT</oj_common_security.version>
         <oj_common_redis.version>1.0-SNAPSHOT</oj_common_redis.version>
         <oj_common_mybatis.version>1.0-SNAPSHOT</oj_common_mybatis.version>
+        <oj_common_message.version>1.0-SNAPSHOT</oj_common_message.version>
+        <oj_common_files.version>1.0-SNAPSHOT</oj_common_files.version>
+        <oj_common_elasticsearch.version>1.0-SNAPSHOT</oj_common_elasticsearch.version>
+        <oj_openfeign.version>1.0-SNAPSHOT</oj_openfeign.version>
+        <oj_common_rabbitmq.version>1.0-SNAPSHOT</oj_common_rabbitmq.version>
+
         <springdoc-openapi.version>2.2.0</springdoc-openapi.version>
         <jakarta.xml.bind.version>3.0.1</jakarta.xml.bind.version>
         <jaxb-runtime.version>3.0.2</jaxb-runtime.version>
@@ -40,6 +48,11 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <jaxb-api.version>2.4.0-b180830.0359</jaxb-api.version>
         <hutool-all.version>5.8.22</hutool-all.version>
         <pagehelper.boot.version>2.0.0</pagehelper.boot.version>
+        <xxl-job.version>2.4.0</xxl-job.version>
+        <transmittable-thread-local.version>2.14.4</transmittable-thread-local.version>
+        <javax.activation.version>1.1.1</javax.activation.version>
+        <javax.xml.bind.version>2.3.1</javax.xml.bind.version>
+        <docker.java.version>3.3.4</docker.java.version>
     </properties>
     <dependencies>
         <!-- bootstrap 启动器 -->
@@ -47,7 +60,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
-
 
 
         <!-- lombok -->
@@ -85,7 +97,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
 
 
         </dependencies>

@@ -20,6 +20,11 @@
         <if test="difficulty != null">
             AND oj_question.difficulty = #{difficulty}
         </if>
+        <if test="selectedQuestionIdSet != null and !selectedQuestionIdSet.isEmpty()">
+            <foreach collection="selectedQuestionIdSet" open=" AND oj_question.question_id NOT IN( " close=" )"  item="id" separator=",">
+                 #{id}
+            </foreach>
+        </if>
         ORDER BY
         oj_question.create_time DESC
     </select>

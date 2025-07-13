@@ -46,5 +46,11 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pagehelper.boot.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>${transmittable-thread-local.version}</version>
+        </dependency>
     </dependencies>
 </project>

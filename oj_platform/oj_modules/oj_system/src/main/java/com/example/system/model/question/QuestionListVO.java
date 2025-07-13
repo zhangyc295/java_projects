@@ -1,6 +1,7 @@
 package com.example.system.model.question;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class QuestionListVO {    //题目列表页展示详情
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)  // 关键注解：强制转为字符串

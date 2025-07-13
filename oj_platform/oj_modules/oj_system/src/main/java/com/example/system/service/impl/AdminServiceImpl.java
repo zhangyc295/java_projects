@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.common.entity.constants.HttpConstants;
 import com.example.common.entity.enums.ResultCode;
 import com.example.common.entity.enums.UserIdentity;
-import com.example.common.entity.model.AdminRedis;
-import com.example.common.entity.model.AdminVO;
+import com.example.common.entity.model.LoginUserRedis;
+import com.example.common.entity.model.LoginUserVO;
 import com.example.common.entity.model.Result;
 import com.example.common.security.exception.ServiceException;
 import com.example.common.security.service.TokenService;
@@ -47,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
             return Result.fail(ResultCode.USER_NOT_EXISTS);
         }
         if (BCryptUtils.matchesPassword(password, admin.getAdminPassword())) {
-            String token = tokenService.createToken(admin.getAdminId(), secret, UserIdentity.ADMIN.getValue(), admin.getNickName());
+            String token = tokenService.createToken(admin.getAdminId(), secret, UserIdentity.ADMIN.getValue(), admin.getNickName(),null);
             return Result.success(token);
         }
         return Result.fail(ResultCode.FAILED_LOGIN);
@@ -63,16 +63,16 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Result<AdminVO> info(String token) {
+    public Result<LoginUserVO> info(String token) {
         // 如果前端设置了令牌前缀，则裁剪掉前缀 HttpConstants.PREFIX
         if (StrUtil.isNotEmpty(token) && token.startsWith(HttpConstants.PREFIX)) {
             token = token.replaceFirst(HttpConstants.PREFIX, StrUtil.EMPTY);
         }
-        AdminRedis admin = tokenService.getAdmin(token, secret);
+        LoginUserRedis admin = tokenService.getAdmin(token, secret);
         if (admin == null) {
             return Result.fail(ResultCode.USER_NOT_EXISTS);
         }
-        AdminVO adminVO = new AdminVO();
+        LoginUserVO adminVO = new LoginUserVO();
         adminVO.setNickName(admin.getNickName());
         return Result.success(adminVO);
     }

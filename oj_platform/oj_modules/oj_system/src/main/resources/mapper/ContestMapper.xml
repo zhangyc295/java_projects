@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.ContestMapper">
+    <select id="selectContestList" resultType="com.example.system.model.contest.ContestListVO">
+        SELECT
+        oj_contest.contest_id,
+        oj_contest.title,
+        oj_contest.start_time,
+        oj_contest.end_time,
+        oj_admin.nick_name,
+        oj_contest.create_time,
+        oj_contest.status
+        FROM oj_contest
+        LEFT JOIN oj_admin
+        ON oj_contest.created_by = oj_admin.admin_id
+        WHERE oj_contest.delete_flag = 0
+        <if test="title != null and title != ''">
+            AND oj_contest.title LIKE CONCAT('%', #{title}, '%')
+        </if>
+        <if test="startTime != null and startTime != ''">
+            AND oj_contest.start_time &gt;= CONCAT(#{startTime},' 00:00:00')
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND oj_contest.end_time &lt;= CONCAT(#{endTime},' 23:59:59')
+        </if>
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+            AND oj_contest.start_time BETWEEN CONCAT(#{startTime}, ' 00:00:00') AND CONCAT(#{endTime}, ' 23:59:59')
+        </if>
+<!--        <if test="startTime != null and startTime != '' and (endTime == null or endTime == '')">-->
+<!--            AND oj_contest.start_time &gt;= CONCAT(#{startTime}, ' 00:00:00')-->
+<!--        </if>-->
+<!--        <if test="endTime != null and endTime != '' and (startTime == null or startTime == '')">-->
+<!--            AND oj_contest.start_time &lt;= CONCAT(#{endTime}, ' 23:59:59')-->
+<!--        </if>-->
+        ORDER BY
+        oj_contest.create_time DESC
+    </select>
+
+    <!--  &lt;小于   &gt;大于 -->
+
+</mapper>

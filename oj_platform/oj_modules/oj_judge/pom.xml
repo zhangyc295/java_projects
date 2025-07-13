@@ -16,5 +16,28 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>oj_openfeign</artifactId>
+            <version>${oj_openfeign.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>oj_common_rabbitmq</artifactId>
+            <version>${oj_common_rabbitmq.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.docker-java</groupId>
+            <artifactId>docker-java</artifactId>
+            <version>${docker.java.version}</version>
+        </dependency>
+    </dependencies>
 </project>
